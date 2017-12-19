@@ -29,7 +29,9 @@ __project__      = "SMURPHS and CMIP6 ozone database"
 __email__        = "r.checa-garcia@reading.ac.uk"
 __status__       = "Consolidating"
 ------------------------------------------------------------------------------
-
+History:
+    - Small refactory of the code in Nov-2017
+    
 """
 
 # Load Libraries and Modules EXTERNAL
