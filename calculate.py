@@ -5,7 +5,7 @@
 # perform data-analysis of the CMIP6 ozone dataset. Some of the
 # methods included here, were developed for SMURPHS project.
 #
-# This software is licensed with GPLv3. Please see <http://www.gnu.org/licenses/>.
+# This software is licensed with GPLv3. Please see <http://www.gnu.org/licenses/>
 """
 Python Module calculate.py
 
