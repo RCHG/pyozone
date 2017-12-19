@@ -47,7 +47,7 @@ from netCDF4    import num2date
 from datetime   import datetime
 from datetime   import timedelta
 
-def save_netcdf(new_var, all_time, val_plevs, val_lat, val_lon, model_ccmi,
+def save_netcdf(new_var, all_time, val_plevs, val_lat, val_lon, model_name,
                 var_ps='none', varname='vmro3',
                 tim_units='months since 1850-01-01 00:00:00.0', calendar='standard'):
     """
@@ -58,12 +58,12 @@ def save_netcdf(new_var, all_time, val_plevs, val_lat, val_lon, model_ccmi,
     """
 
     print('Main Memory use: %s (kb)' % resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
-    print('.... saving to : %s ' % model_ccmi)
+    print('.... saving to : %s ' % model_name)
 
 
-    nc_ccmi = Dataset(model_ccmi, mode='w', format='NETCDF4')
+    nc_model = Dataset(model_name, mode='w', format='NETCDF4')
 
-    medat = nc_ccmi.createGroup('METADATA')
+    medat = nc_model.createGroup('METADATA')
     medat.references   = 'http://www.met.reading.ac.uk/'
     medat.creator_name = "Ramiro Checa-Garcia (supervised by M.I. Hegglin)"
     medat.creator_mail = "r.checa-garcia@reading.ac.uk"
@@ -72,15 +72,15 @@ def save_netcdf(new_var, all_time, val_plevs, val_lat, val_lon, model_ccmi,
     medat.pyMerge_version = 'September 2016'
 
     # We create the main dimensions
-    nc_ccmi.createDimension('time', None)
-    nc_ccmi.createDimension('plev', len(val_plevs))
-    nc_ccmi.createDimension('lat', len(val_lat))
-    nc_ccmi.createDimension('lon', len(val_lon))
+    nc_model.createDimension('time', None)
+    nc_model.createDimension('plev', len(val_plevs))
+    nc_model.createDimension('lat', len(val_lat))
+    nc_model.createDimension('lon', len(val_lon))
 
-    time = nc_ccmi.createVariable('time', 'f8', ('time',))
-    levs = nc_ccmi.createVariable('plev', 'f4', ('plev',))
-    lats = nc_ccmi.createVariable('lat', 'f4', ('lat',))
-    lons = nc_ccmi.createVariable('lon', 'f4', ('lon',))
+    time = nc_model.createVariable('time', 'f8', ('time',))
+    levs = nc_model.createVariable('plev', 'f4', ('plev',))
+    lats = nc_model.createVariable('lat', 'f4', ('lat',))
+    lons = nc_model.createVariable('lon', 'f4', ('lon',))
 
     lons.units = 'degrees east'
     lons.standard_name = "longitude"
@@ -95,21 +95,21 @@ def save_netcdf(new_var, all_time, val_plevs, val_lat, val_lon, model_ccmi,
     lons[:] = val_lon
 
     if varname == 'vmro3':
-        vmr = nc_ccmi.createVariable('vmro3', 'f8',
+        vmr = nc_model.createVariable('vmro3', 'f8',
                                     ('time', 'plev', 'lat', 'lon'),
                                      fill_value=-999.9)
         vmr.units = 'vmr'
         vmr.standard_name = 'Volume Mixing Ratio O3'
 
     if varname == 'vmrh2o':
-        vmr = nc_ccmi.createVariable('vmrh2o', 'f8',
+        vmr = nc_model.createVariable('vmrh2o', 'f8',
                                     ('time', 'plev', 'lat', 'lon'),
                                     fill_value=-999.9)
         vmr.units = 'vmr'
         vmr.standard_name = 'Volume Mixing Ratio H2O'
 
     if var_ps != 'none':
-        surf_press = nc_ccmi.createVariable('ps', 'f8',
+        surf_press = nc_model.createVariable('ps', 'f8',
                                     ('time', 'lat', 'lon'),
                                      fill_value=-999.9)
         surf_press.units = 'Pa'
@@ -118,7 +118,7 @@ def save_netcdf(new_var, all_time, val_plevs, val_lat, val_lon, model_ccmi,
 
     vmr[:] = new_var
 
-    nc_ccmi.close()
+    nc_model.close()
 
     return
 
