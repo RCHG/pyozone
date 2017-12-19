@@ -2,8 +2,8 @@
 #     email: r.checa-garcia@reading.ac.uk
 #
 # This file is part of a set of Python Modules to process and
-# perform data-analysis of the CMIP6 ozone dataset. Some of the methods here
-# included were developed for SMURPHS project.
+# perform data-analysis of the CMIP6 ozone dataset. Some of the methods 
+# here included were developed for SMURPHS project.
 #
 # This software is licensed with GPLv3. Please see <http://www.gnu.org/licenses/>
 """
