@@ -8,6 +8,8 @@ This software repository has modules used for data analysis of ozone datasets. T
 
 ## How to cite:
 
+The easiest way to cite this code is using its zenodo doi:
+
 <a href="https://doi.org/10.5281/zenodo.1118950"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.1118950.svg" alt="DOI"></a>
 
 ## Dependences
